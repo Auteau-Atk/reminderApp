@@ -12,7 +12,7 @@ Links for github research:
 2. https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
 3. https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
-Hugh :
+Hugh Mikael Gelle:
 
 1. Worked on Update - This task is responsible for being able to update tasks
 2. Worked on Delete - This task is responsible for allowing tasks to be deleted
