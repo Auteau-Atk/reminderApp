@@ -22,3 +22,4 @@ Jaymond Mach :
 1. Worked on Update - This task is responsible for being able to update tasks
 2. Worked on Delete - This task is responsible for allowing tasks to be deleted
 3. Watched Lecture 6 - Finished up with watching Part 1
+4. Watched Lecture 7 - Finished up with watching Part 2
