@@ -39,3 +39,6 @@ Aiden Denike:
 Aiden Denike:
 
 1. change all mentions of cindy to current user, this will allow us to have everything not be hard coded to cindy
+2. Immedietly broke, so changed it all back. Fixed to in theory work with passport database
+3. Got passport working, used hugh's secret for it
+4. Worked on bonus
