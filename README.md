@@ -27,3 +27,7 @@ Jaymond Mach :
 Aiden Denike: 
 1. Working on sprint 2
 2. Trying to get passport authentication working - The seperate lab
+
+4/18/2024
+Aiden Denike:
+1. change all mentions of cindy to current user, this will allow us to have everything not be hard coded to cindy
