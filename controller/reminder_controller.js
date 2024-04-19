@@ -14,6 +14,7 @@ let remindersController = {
 
   listOne: (req, res) => {
     let reminderToFind = req.params.id;
+    current_user=req.user.name
     let searchResult = database[current_user].reminders.find(function (reminder) {
       return reminder.id == reminderToFind;
     });
@@ -25,6 +26,7 @@ let remindersController = {
   },
 
   create: (req, res) => {
+    current_user=req.user.name
     let reminder = {
       id: database[current_user].reminders.length + 1,
       title: req.body.title,
@@ -36,6 +38,7 @@ let remindersController = {
   },
 
   edit: (req, res) => {
+    current_user=req.user.name
     let reminderToFind = req.params.id;
     let searchResult = database[current_user].reminders.find(function (reminder) {
       return reminder.id == reminderToFind;
@@ -45,6 +48,7 @@ let remindersController = {
 
   update: (req, res) => {
     // implementation here 👈
+    current_user=req.user.name
     let reminderToUpdateId = req.params.id;
     let updatedReminder = {
       id: parseInt(reminderToUpdateId),
@@ -66,6 +70,7 @@ let remindersController = {
 
   delete: (req, res) => {
     // implementation here 👈
+    current_user=req.user.name
     let reminderToDeleteId = req.params.id;
     let index = database[current_user].reminders.findIndex(function(reminder) {
       return reminder.id === parseInt(reminderToDeleteId);
