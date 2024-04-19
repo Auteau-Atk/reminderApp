@@ -19,6 +19,7 @@
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.2.0",
     "method-override": "^2.3.7",
+    "node-fetch": "^3.3.2",
     "nodemon": "^1.11.0"
   }
 }

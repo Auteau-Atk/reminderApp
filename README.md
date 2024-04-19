@@ -42,3 +42,4 @@ Aiden Denike:
 2. Immedietly broke, so changed it all back. Fixed to in theory work with passport database
 3. Got passport working, used hugh's secret for it
 4. Worked on bonus
+5. Fixed what jay broke, call me the fucking GOAT BAAAAAAAAAAAA

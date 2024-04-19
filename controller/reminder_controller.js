@@ -1,5 +1,6 @@
 let database = require("../database");
 
+
 async function getImage(keyword) {
   const url =
     "https://api.unsplash.com/search/photos?page=1&query=" +
