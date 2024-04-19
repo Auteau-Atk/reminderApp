@@ -1,5 +1,5 @@
-const userModel = require("../models/userModel").userModel;
-const database = require("../models/userModel").database;
+const userModel = require("../database").userModel;
+// const database = require("../models/userModel").database;
 
 const getUserByEmailIdAndPassword = (email, password) => {
   let user = userModel.findOne(email);
@@ -18,16 +18,20 @@ const getUserById = (id) => {
   return null;
 };
 
-const findOrCreate =  (object) => {
-  const user = database.find((user) => user.id === object.id);
+// const findOrCreate =  (object) => {
+//   const user = database.find((user) => user.id === object.id);
 
-  if (!user) {
-    newUser = { id: object.id,
-      name: object.name,
-      email: object.email,
-      role: "user" };
-    database.push(newUser);
-  }
+//   if (!user) {
+//     newUser = { id: object.id,
+//       name: object.name,
+//       email: object.email,
+//       role: "user" };
+//     database.push(newUser);
+//   }
+// }
+
+function addUser(newUser) {
+  userModel.add(newUser)
 }
 
 function isUserValid(user, password) {
@@ -37,5 +41,5 @@ function isUserValid(user, password) {
 module.exports = {
   getUserByEmailIdAndPassword,
   getUserById,
-  findOrCreate
+  addUser
 };
