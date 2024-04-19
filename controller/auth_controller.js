@@ -41,7 +41,7 @@ let authController = {
 
       userModel.database.push(newUser);
       req.session.user = newUser; 
-      res.redirect("/dashboard"); 
+      res.redirect("/reminders"); 
     }
   },
 
