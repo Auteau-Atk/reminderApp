@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
+const { ensureAuthenticated, AdminTester } = require("../middleware/checkAuth");
 
 router.get("/", (req, res) => {
   res.send("welcome");

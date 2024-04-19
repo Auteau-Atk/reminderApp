@@ -46,3 +46,4 @@ Aiden Denike:
 1. Worked on bonus
 2. Fixed what jay broke, call me the fucking GOAT BAAAAAAAAAAAA
 3. login page now shows up, but does not work, WIP to connecting it
+4. Working on everything, but github is bugged. Not sure why.

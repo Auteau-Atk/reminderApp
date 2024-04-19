@@ -24,13 +24,12 @@ const localLogin = new LocalStrategy(
 );
 
 passport.use(localLogin);
-
 passport.use(
   new GitHubStrategy(
     {
       clientID: githubClientId,
       clientSecret: githubClientSecret,
-      callbackURL: "http://localhost:8000/auth/github/callback"
+      callbackURL: "http://localhost:3001/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, done) {
       console.log(profile);
