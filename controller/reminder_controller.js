@@ -43,10 +43,10 @@ let remindersController = {
     }
   },
 
-  create: async (req, res) => {
+  create: (req, res) => {
     // current_user = req.user.name;
     bannner_for_pic=req.body.banner
-    banner_image=await getImage(bannner_for_pic)
+    banner_image=getImage(bannner_for_pic)
     let reminder = {
       // id: database[current_user].reminders.length + 1,
       id: req.user.reminders.length + 1,
@@ -73,11 +73,11 @@ let remindersController = {
     res.render("reminder/edit", { reminderItem: searchResult });
   },
 
-  update: async (req, res) => {
+  update: (req, res) => {
     // implementation here 👈
     // current_user = req.user.name;
     bannner_for_pic=req.body.banner
-    banner_image=await getImage(bannner_for_pic)
+    banner_image=getImage(bannner_for_pic)
     let reminderToUpdateId = req.params.id;
     let updatedReminder = {
       id: parseInt(reminderToUpdateId),

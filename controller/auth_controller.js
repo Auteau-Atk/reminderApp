@@ -2,11 +2,11 @@ const { userModel } = require("../models/userModel");
 
 let authController = {
   login: (req, res) => {
-    res.render("auth/login");
+    res.render("auth/login", {user:req.user});
   },
 
   register: (req, res) => {
-    res.render("auth/register");
+    res.render("auth/register",{email:req.query.email, user:req.user});
   },
 
   loginSubmit: (req, res) => {
@@ -16,7 +16,7 @@ let authController = {
       const user = userModel.findOne(email);
       if (user.password === password) {
         req.session.user = user; 
-        res.redirect("/dashboard"); 
+        res.redirect("/reminders"); 
       } else {
         res.render("auth/login", { error: "Invalid email or password" });
       }
