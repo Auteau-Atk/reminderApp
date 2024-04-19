@@ -11,4 +11,10 @@ module.exports = {
     }
     res.redirect("/dashboard");
   },
+  adminTester: function (req,res,nextFunction) {
+    if (req.user.type=="Admin") {
+      return nextFunction();
+    }
+    res.redirect("/reminders")
+    }
 };
