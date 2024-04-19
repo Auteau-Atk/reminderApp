@@ -6,8 +6,6 @@ const router = express.Router();
 
 router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 
-// Middleware: A funtion sits in a route and intercepts it
-
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -19,6 +17,20 @@ router.post(
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");
+});
+
+// Middleware to store user's name in session
+function storeUserNameInSession(req, res, next) {
+  if (req.user) {
+    req.session.userName = req.user.name; // Assuming user's name is stored in req.user.name
+  }
+  next();
+}
+
+router.get("/dashboard", storeUserNameInSession, (req, res) => {
+  // Retrieve user's name from session
+  const userName = req.session.userName;
+  res.render("dashboard", { userName }); // Pass userName to the dashboard template
 });
 
 module.exports = router;
