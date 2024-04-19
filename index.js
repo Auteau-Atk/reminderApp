@@ -5,8 +5,12 @@ const passport = require("./middleware/passport");
 const authController = require("./controller/auth_controller");
 const reminderController = require("./controller/reminder_controller");
 const path = require("path");
+const {forwardAuthenticated, ensureAuthenticated, adminTester}=require("./middleware/checkAuth");
 const app = express();
 const port = process.env.PORT || 3001;
+app.set("view engine", "ejs");
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
   session({
@@ -21,35 +25,44 @@ app.use(
   })
 );
 
-app.set("view engine", "ejs");
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use((req, res, next) => {
   console.log(`User details: `, req.user);
   console.log(`Entire session object: `, req.session);
   console.log(`Session details: `, req.session.passport);
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+    res.locals.admin = req.user.role;
+  } else {
+    res.locals.user = null;
+    res.locals.admin = null;
+  }
   next();
 });
 
 app.use("/reminders", authController.isAuthenticated);
 
-app.get("/reminders", reminderController.list);
-app.get("/reminder/new", reminderController.new);
-app.get("/reminder/:id", reminderController.listOne);
-app.get("/reminder/:id/edit", reminderController.edit);
-app.post("/reminder/", reminderController.create);
-app.post("/reminder/update/:id", reminderController.update);
-app.post("/reminder/delete/:id", reminderController.delete);
-
+app.get("/reminders",ensureAuthenticated, reminderController.list);
+app.get("/reminder/new",ensureAuthenticated, reminderController.new);
+app.get("/reminder/:id",ensureAuthenticated, reminderController.listOne);
+app.get("/reminder/:id/edit",ensureAuthenticated, reminderController.edit);
+app.post("/reminder/",ensureAuthenticated, reminderController.create);
+app.post("/reminder/update/:id",ensureAuthenticated, reminderController.update);
+app.post("/reminder/delete/:id",ensureAuthenticated, reminderController.delete);
+app.get("/login",forwardAuthenticated, authController.login);
 app.get("/register", authController.register);
-app.get("/login", authController.login);
 app.post("/register", authController.registerSubmit);
 
-app.post("/login", passport.authenticate("local", { failureRedirect: "/login" }), (req, res) => {
-  res.redirect("/reminders"); // Redirect to reminders page upon successful login
-});
-
+app.post("/login", passport.authenticate("local", { failureRedirect: "/login" }), (req, res) => {res.redirect("/reminders"); });
+app.get("/admindashboard", ensureAuthenticated, adminTester, authController.adminPage);
+app.post("/admindashboard/delete/:sid", ensureAuthenticated, adminTester, (req, res) => {
+  store = req.sessionStore;
+  store.destroy(req.params.sid, function (err) {
+    if (err) {
+      console.log(err);
+    } else res.redirect("/admindashboard");
+  });
+}
+);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(port, () => {
