@@ -43,7 +43,10 @@ Aiden Denike:
 3. Got passport working, used hugh's secret for it
 
 4/19/2024
+Aiden Denike + Hugh mikael gelle:
 1. Worked on bonus
 2. Fixed what jay broke, call me the fucking GOAT BAAAAAAAAAAAA
 3. login page now shows up, but does not work, WIP to connecting it
 4. Working on everything, but github is bugged. Not sure why.
+5. Github is in theory full functional, trying to implement admin features
+6. currently admin features are causing full crashes
