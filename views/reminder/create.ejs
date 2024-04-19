@@ -2,11 +2,33 @@
   <form action="/reminder" method="POST">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="titleInput" placeholder="Title" name="title">
+      <input
+        type="text"
+        class="form-control"
+        id="titleInput"
+        placeholder="Title"
+        name="title"
+      />
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"></textarea>
+      <textarea
+        class="form-control"
+        id="descriptionInput"
+        rows="3"
+        placeholder="Description"
+        name="description"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="banner">Banner Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        id="bannerInput"
+        placeholder="Banner Image URL"
+        name="banner"
+      />
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
