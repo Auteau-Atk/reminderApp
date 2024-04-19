@@ -1,0 +1,16 @@
+<h1>Admin Dashboard</h1>
+<h1>Active Sessions</h1>
+<% for (session of Object.keys(sessions)){ %>
+    <%sessionParse = sessions[session] %>
+    <p class="d-flex justify-content-center">
+        Session Id: <%=session%>
+        <br >
+        User Id: <%=sessionParse.passport.user%>
+        <br>
+        <form method="POST" class="d-flex justify-content-center" action="/admindashboard/delete/<%= session %>">
+            <button class="btn btn-outline-danger" type="submit">
+              Revoke Session
+            </button>
+          </form>
+    <p>
+<% } %>
