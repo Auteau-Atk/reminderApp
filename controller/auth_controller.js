@@ -51,6 +51,19 @@ let authController = {
     } else {
       res.redirect("/login"); 
     }
+  },
+  adminPage:(req, res, next) => {
+    sessions = req.sessionStore;
+    sessions.all(function (err, sessions) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admindashboard", {
+          user: req.user,
+          sessions: sessions,
+        });
+      }
+    });
   }
 };
 
