@@ -1,6 +1,5 @@
 let database = require("../database");
 
-
 async function getImage(keyword) {
   const url =
     "https://api.unsplash.com/search/photos?page=1&query=" +
@@ -16,7 +15,7 @@ let remindersController = {
   list: (req, res) => {
     // current_user = req.user.name;
     res.render("reminder/index", {
-      reminders: database.cindy.reminders
+      reminders: req.user.reminders
       //reminders: database[current_user].reminders,
     });
   },
@@ -29,7 +28,7 @@ let remindersController = {
     let reminderToFind = req.params.id;
     // current_user = req.user.name;
     // let searchResult = database[current_user].reminders.find(function (
-    let searchResult = database.cindy.reminders.find(function (
+    let searchResult = req.user.reminders.find(function (
       reminder
     ) {
       return reminder.id == reminderToFind;
@@ -39,22 +38,26 @@ let remindersController = {
     } else {
       res.render("reminder/index", {
         // reminders: database[current_user].reminders,
-        reminders: database.cindy.reminders,
+        reminders: req.user.reminders,
       });
     }
   },
 
   create: (req, res) => {
     // current_user = req.user.name;
+    bannner_for_pic=req.body.banner
+    banner_image=getImage(bannner_for_pic)
     let reminder = {
       // id: database[current_user].reminders.length + 1,
-      id: database.cindy.reminders.length + 1,
+      id: req.user.reminders.length + 1,
       title: req.body.title,
       description: req.body.description,
       completed: false,
+      banner: banner_image,
+      word: bannner_for_pic
     };
     // database[current_user].reminders.push(reminder);
-    database.cindy.reminders.push(reminder);
+    req.user.reminders.push(reminder);
     res.redirect("/reminders");
   },
 
@@ -62,7 +65,7 @@ let remindersController = {
     // current_user = req.user.name;
     let reminderToFind = req.params.id;
     // let searchResult = database[current_user].reminders.find(function (
-    let searchResult = database.cindy.reminders.find(function (
+    let searchResult = req.user.reminders.find(function (
       reminder
     ) {
       return reminder.id == reminderToFind;
@@ -73,21 +76,26 @@ let remindersController = {
   update: (req, res) => {
     // implementation here 👈
     // current_user = req.user.name;
+    bannner_for_pic=req.body.banner
+    banner_image=getImage(bannner_for_pic)
     let reminderToUpdateId = req.params.id;
     let updatedReminder = {
       id: parseInt(reminderToUpdateId),
       title: req.body.title,
       description: req.body.description,
+      completed: false,
+      banner:banner_image,
+      word:bannner_for_pic,
       completed: req.body.completed === "true",
     };
 
     // let index = database[current_user].reminders.findIndex(function (reminder) {
-    let index = database.cindy.reminders.findIndex(function (reminder) {
+    let index = req.user.reminders.findIndex(function (reminder) {
       return reminder.id === parseInt(reminderToUpdateId);
     });
     if (index !== -1) {
       // database[current_user].reminders[index] = updatedReminder;
-      database.cindy.reminders[index] = updatedReminder;
+      req.user.reminders[index] = updatedReminder;
       res.redirect("/reminders");
     } else {
       res.status(404).send("Reminder not found");
@@ -95,16 +103,15 @@ let remindersController = {
   },
 
   delete: (req, res) => {
-    // implementation here 👈
     // current_user = req.user.name;
     let reminderToDeleteId = req.params.id;
     // let index = database[current_user].reminders.findIndex(function (reminder) {
-    let index = database.cindy.reminders.findIndex(function (reminder) {
+    let index = req.user.reminders.findIndex(function (reminder) {
       return reminder.id === parseInt(reminderToDeleteId);
     });
     if (index !== -1) {
       // database[current_user].reminders.splice(index, 1);
-      database.cindy.reminders.splice(index, 1);
+      req.user.reminders.splice(index, 1);
       res.redirect("/reminders");
     } else {
       res.status(404).send("Reminder not found");
