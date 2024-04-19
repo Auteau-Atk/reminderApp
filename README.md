@@ -45,3 +45,4 @@ Aiden Denike:
 4/19/2024
 1. Worked on bonus
 2. Fixed what jay broke, call me the fucking GOAT BAAAAAAAAAAAA
+3. login page now shows up, but does not work, WIP to connecting it
