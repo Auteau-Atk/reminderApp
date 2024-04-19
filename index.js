@@ -1,36 +1,71 @@
+// Import required modules
+require('dotenv').config();
 const express = require("express");
-const app = express();
-const path = require("path");
-const ejsLayouts = require("express-ejs-layouts");
-const reminderController = require("./controller/reminder_controller");
+const session = require("express-session");
+const passport = require("./middleware/passport");
 const authController = require("./controller/auth_controller");
+const reminderController = require("./controller/reminder_controller");
+const path = require("path");
 
-app.use(express.static(path.join(__dirname, "public")));
+// Create Express app
+const app = express();
+const port = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: false }));
+// Set up session middleware
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
 
-app.use(ejsLayouts);
-
+// Set the view engine to EJS
 app.set("view engine", "ejs");
 
-// Routes start here
+// Initialize passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Middleware to log user details and session information
+app.use((req, res, next) => {
+  console.log(`User details: `, req.user);
+  console.log(`Entire session object: `, req.session);
+  console.log(`Session details: `, req.session.passport);
+  next();
+});
+
+// Protect reminder routes with authentication
+app.use("/reminders", authController.isAuthenticated);
+
+// Define reminder routes
 app.get("/reminders", reminderController.list);
 app.get("/reminder/new", reminderController.new);
 app.get("/reminder/:id", reminderController.listOne);
 app.get("/reminder/:id/edit", reminderController.edit);
 app.post("/reminder/", reminderController.create);
-// ⭐ Implement these two routes below!
 app.post("/reminder/update/:id", reminderController.update);
 app.post("/reminder/delete/:id", reminderController.delete);
 
-// 👌 Ignore for now
+// Define authentication routes
 app.get("/register", authController.register);
 app.get("/login", authController.login);
 app.post("/register", authController.registerSubmit);
-app.post("/login", authController.loginSubmit);
 
-app.listen(3001, function () {
-  console.log(
-    "Server running. Visit: http://localhost:3001/reminders in your browser 🚀"
-  );
+// Handle login form submission
+app.post("/login", passport.authenticate("local", { failureRedirect: "/login" }), (req, res) => {
+  res.redirect("/reminders"); // Redirect to reminders page upon successful login
+});
+
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running. Visit: http://localhost:${port}/reminders in your browser 🚀`);
 });
