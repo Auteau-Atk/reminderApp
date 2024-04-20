@@ -45,7 +45,7 @@ let remindersController = {
   create: async (req, res) => {
     // current_user = req.user.name;
     let banner_image = ""; 
-    let banner_pic = "reminder";
+    let banner_pic = "";
 
     if (req.body.banner) {
     banner_pic=req.body.banner;
@@ -81,7 +81,7 @@ let remindersController = {
     // implementation here 👈
     // current_user = req.user.name;
     let banner_image = ""; 
-    let banner_pic = "reminder";
+    let banner_pic = "";
 
     if (req.body.banner) {
     banner_pic=req.body.banner;
