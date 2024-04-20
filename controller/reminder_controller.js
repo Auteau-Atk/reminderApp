@@ -48,8 +48,8 @@ let remindersController = {
     let banner_pic = "";
 
     if (req.body.banner) {
-    banner_pic=req.body.banner;
-    banner_image=await getImage(banner_pic);
+      banner_pic=req.body.banner;
+      banner_image=await getImage(banner_pic);
     }
     let reminder = {
       // id: database[current_user].reminders.length + 1,

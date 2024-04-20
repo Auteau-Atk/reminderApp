@@ -13,10 +13,17 @@ Links for aiden github research:
 2. https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
 3. https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
+Links for hugh:
+1. https://www.passportjs.org/packages/passport-github2/
+2. https://www.passportjs.org/docs/ (I don't want to read this anymore)
+3. https://www.npmjs.com/package/passport
+
 Hugh Mikael Gelle:
 
 1. Worked on Update - This task is responsible for being able to update tasks
 2. Worked on Delete - This task is responsible for allowing tasks to be deleted
+3. Worked on Passport - Allows the login of users 
+4. Worked on Gitub Auth - Allows the login of a github account
 
 Jaymond Mach :
 
@@ -51,11 +58,11 @@ Aiden Denike + Hugh mikael gelle:
 5. Github is in theory full functional, trying to implement admin features
 6. currently admin features are causing full crashes
 
-
 4/20 
 Aiden Denike + Hugh mikael gelle:
 1. Everything is functional
 2. Worked on bonus, ejs files, github authentication, changed database to have ID's and banner tags and images
+3. Banners are fully optional
 
 Challenges:
 1. we kept pushing github updates that would break the app
