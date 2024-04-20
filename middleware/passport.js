@@ -23,18 +23,17 @@ const localLogin = new LocalStrategy(
   }
 );
 
-passport.use(localLogin);
 passport.use(
   new GitHubStrategy(
     {
       clientID: githubClientId,
       clientSecret: githubClientSecret,
-      callbackURL: "http://localhost:3001/auth/github/callback"
+      callbackURL: "http://localhost:8000/auth/github/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile);
-      // Make a new user with the profile information
-      userController.findOrCreate(profile);
+      if(!userController.lookForUser(profile)) {
+        userController.addUser(profile);
+      }
       return done(null, profile);
     }
   )
@@ -53,8 +52,9 @@ passport.deserializeUser(function(id, done) {
   }
 });
 
-// You can use these variables wherever you need them in your code
 console.log("GitHub Client ID:", githubClientId);
 console.log("GitHub Client Secret:", githubClientSecret);
+
+passport.use("local", localLogin);
 
 module.exports = passport;
