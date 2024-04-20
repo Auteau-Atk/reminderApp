@@ -1,4 +1,7 @@
 const { userModel } = require("../models/userModel");
+let database = require("../database").database;
+const { addUser } = require("./userController");
+
 
 let authController = {
   login: (req, res) => {
