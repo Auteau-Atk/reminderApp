@@ -50,3 +50,13 @@ Aiden Denike + Hugh mikael gelle:
 4. Working on everything, but github is bugged. Not sure why.
 5. Github is in theory full functional, trying to implement admin features
 6. currently admin features are causing full crashes
+
+
+4/20 
+Aiden Denike + Hugh mikael gelle:
+1. Everything is functional
+2. Worked on bonus, ejs files, github authentication, changed database to have ID's and banner tags and images
+
+Challenges:
+1. we kept pushing github updates that would break the app
+2. atm if splash doesn't return a picture the entire website crashes
