@@ -10,7 +10,6 @@ async function getImage(keyword) {
   return data.results[0].urls.regular;
 }
 
-current_user = "";
 let remindersController = {
   list: (req, res) => {
     // current_user = req.user.name;
@@ -45,8 +44,8 @@ let remindersController = {
 
   create: async (req, res) => {
     // current_user = req.user.name;
-    bannner_for_pic=req.body.banner
-    banner_image= await getImage(bannner_for_pic)
+    banner_pic=req.body.banner
+    banner_image= await getImage(banner_pic)
     let reminder = {
       // id: database[current_user].reminders.length + 1,
       id: req.user.reminders.length + 1,
@@ -54,7 +53,7 @@ let remindersController = {
       description: req.body.description,
       completed: false,
       banner: banner_image,
-      word: bannner_for_pic
+      word: banner_pic
     };
     // database[current_user].reminders.push(reminder);
     req.user.reminders.push(reminder);
@@ -76,16 +75,19 @@ let remindersController = {
   update: async (req, res) => {
     // implementation here 👈
     // current_user = req.user.name;
-    bannner_for_pic=req.body.banner
-    banner_image=await getImage(bannner_for_pic)
+    banner_pic=req.body.banner;
+
+    banner_image=await getImage(banner_pic);
+
     let reminderToUpdateId = req.params.id;
+
     let updatedReminder = {
       id: parseInt(reminderToUpdateId),
       title: req.body.title,
       description: req.body.description,
       completed: false,
       banner:banner_image,
-      word:bannner_for_pic,
+      word:banner_pic,
       completed: req.body.completed === "true",
     };
 
